@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Conclusion – Creative Coding with Pure Data</title>
+<title>3&nbsp; Sequencers – Creative Coding with Pure Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/sonification.html" rel="prev">
+<link href="../chapters/synthesis.html" rel="next">
+<link href="../chapters/playrec.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -45,6 +46,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-1e81d527365e20b3495763033adbcf98.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-8ab8b311eebd604b8865a9cbc6c08092.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../site_libs/bootstrap/bootstrap-1e81d527365e20b3495763033adbcf98.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,6 +76,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<meta name="mermaid-theme" content="neutral">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -246,7 +254,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/conclusion.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conclusion</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/sequencers.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sequencers</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -294,7 +302,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/sequencers.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/sequencers.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sequencers</span></span></a>
   </div>
 </li>
@@ -318,7 +326,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/conclusion.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/conclusion.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
   </div>
 </li>
@@ -332,7 +340,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link active" data-scroll-target="#key-takeaways"><span class="header-section-number">7.1</span> Key Takeaways</a></li>
+  <li><a href="#random-melody-generator" id="toc-random-melody-generator" class="nav-link active" data-scroll-target="#random-melody-generator"><span class="header-section-number">3.1</span> Random Melody Generator</a>
+  <ul class="collapse">
+  <li><a href="#patch-overview" id="toc-patch-overview" class="nav-link" data-scroll-target="#patch-overview"><span class="header-section-number">3.1.1</span> Patch Overview</a></li>
+  <li><a href="#scale-and-melody-generation" id="toc-scale-and-melody-generation" class="nav-link" data-scroll-target="#scale-and-melody-generation"><span class="header-section-number">3.1.2</span> Scale and Melody Generation</a></li>
+  <li><a href="#melody-storage" id="toc-melody-storage" class="nav-link" data-scroll-target="#melody-storage"><span class="header-section-number">3.1.3</span> Melody Storage</a></li>
+  <li><a href="#playback-control" id="toc-playback-control" class="nav-link" data-scroll-target="#playback-control"><span class="header-section-number">3.1.4</span> Playback Control</a></li>
+  <li><a href="#midi-output" id="toc-midi-output" class="nav-link" data-scroll-target="#midi-output"><span class="header-section-number">3.1.5</span> MIDI Output</a></li>
+  <li><a href="#step-by-step-data-flow" id="toc-step-by-step-data-flow" class="nav-link" data-scroll-target="#step-by-step-data-flow"><span class="header-section-number">3.1.6</span> Step-by-Step Data Flow</a></li>
+  <li><a href="#key-objects-and-their-roles" id="toc-key-objects-and-their-roles" class="nav-link" data-scroll-target="#key-objects-and-their-roles"><span class="header-section-number">3.1.7</span> Key Objects and Their Roles</a></li>
+  <li><a href="#diagram-melody-generation-and-playback" id="toc-diagram-melody-generation-and-playback" class="nav-link" data-scroll-target="#diagram-melody-generation-and-playback"><span class="header-section-number">3.1.8</span> Diagram: Melody Generation and Playback</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">3.1.9</span> Summary</a></li>
+  </ul></li>
+  <li><a href="#euclidean-sequencer" id="toc-euclidean-sequencer" class="nav-link" data-scroll-target="#euclidean-sequencer"><span class="header-section-number">3.2</span> Euclidean Sequencer</a>
+  <ul class="collapse">
+  <li><a href="#patch-overview-1" id="toc-patch-overview-1" class="nav-link" data-scroll-target="#patch-overview-1"><span class="header-section-number">3.2.1</span> Patch Overview</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -342,7 +365,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conclusion</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sequencers</span></h1>
 </div>
 
 
@@ -359,17 +382,257 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In this chapter, we summarize the key points discussed throughout the book. We reflect on the main topics introduced in the first chapter and the detailed discussions in the second chapter.</p>
-<section id="key-takeaways" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">7.1</span> Key Takeaways</h2>
+<section id="random-melody-generator" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="random-melody-generator"><span class="header-section-number">3.1</span> Random Melody Generator</h2>
+<p>This chapter provides a step-by-step explanation of the <a href="../assets/code/sequencers/music-scale-B.pd">music-scale-B.pd</a> Pure Data patch. The patch demonstrates how to generate a melody using a musical scale, store it in an array, and play it back using MIDI.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../assets/images/random_melody.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Random Melody Generator"><img src="../assets/images/random_melody.png" class="img-fluid figure-img" alt="Random Melody Generator"></a></p>
+<figcaption>Random Melody Generator</figcaption>
+</figure>
+</div>
+<hr>
+<section id="patch-overview" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="patch-overview"><span class="header-section-number">3.1.1</span> Patch Overview</h3>
+<p>The patch is organized into several functional blocks:</p>
 <ul>
-<li>Highlight the main objectives of the book.</li>
-<li>Discuss the significance of the topics covered.</li>
-<li>Encourage further exploration and learning in the subject area.</li>
+<li><strong>Scale and Melody Generation</strong></li>
+<li><strong>Melody Storage</strong></li>
+<li><strong>Playback Control</strong></li>
+<li><strong>MIDI Output</strong></li>
 </ul>
-<p>Thank you for reading! We hope this book has provided valuable insights and knowledge.</p>
+<p>Below is a simplified diagram of the main data flow:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A[Scale Input] --&gt; B[Melody Generation]
+    B --&gt; C[Store in Array]
+    C --&gt; D[Playback Control]
+    D --&gt; E[MIDI Output]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="scale-and-melody-generation" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="scale-and-melody-generation"><span class="header-section-number">3.1.2</span> Scale and Melody Generation</h3>
+<section id="scale-definition" class="level4" data-number="3.1.2.1">
+<h4 data-number="3.1.2.1" class="anchored" data-anchor-id="scale-definition"><span class="header-section-number">3.1.2.1</span> Scale Definition</h4>
+<p>The patch starts with a message box containing the scale intervals:</p>
+<p><code>0 2 4 5 7 9 11</code></p>
+<p>For example, this represents a major scale in semitones accordding to the following mapping:</p>
+<div style="width: 50%;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Note</th>
+<th>Interval</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>C</td>
+<td><code>0</code></td>
+</tr>
+<tr class="even">
+<td>C# / Db</td>
+<td><code>1</code></td>
+</tr>
+<tr class="odd">
+<td>D</td>
+<td><code>2</code></td>
+</tr>
+<tr class="even">
+<td>D# / Eb</td>
+<td><code>3</code></td>
+</tr>
+<tr class="odd">
+<td>E</td>
+<td><code>4</code></td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td><code>5</code></td>
+</tr>
+<tr class="odd">
+<td>F# / Gb</td>
+<td><code>6</code></td>
+</tr>
+<tr class="even">
+<td>G</td>
+<td><code>7</code></td>
+</tr>
+<tr class="odd">
+<td>G# / Ab</td>
+<td><code>8</code></td>
+</tr>
+<tr class="even">
+<td>A</td>
+<td><code>9</code></td>
+</tr>
+<tr class="odd">
+<td>A# / Bb</td>
+<td><code>10</code></td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td><code>11</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>The scale is appended to a list and processed to determine its length.</p>
+</section>
+<section id="random-note-selection" class="level4" data-number="3.1.2.2">
+<h4 data-number="3.1.2.2" class="anchored" data-anchor-id="random-note-selection"><span class="header-section-number">3.1.2.2</span> Random Note Selection</h4>
+<p>A random number between 0 and 47 is generated (<code>random 48</code>), then shifted up by 60 to get a MIDI note in a typical range.</p>
+<p>The note is then mapped to the scale using modulo operations and list indexing.</p>
+</section>
+<section id="melody-construction" class="level4" data-number="3.1.2.3">
+<h4 data-number="3.1.2.3" class="anchored" data-anchor-id="melody-construction"><span class="header-section-number">3.1.2.3</span> Melody Construction</h4>
+<p>The patch uses a loop (<code>until</code>, <code>i</code>, <code>+ 1</code>) to generate a sequence of notes.</p>
+<p>Each note is calculated based on the scale and stored in a list.</p>
+<hr>
+</section>
+</section>
+<section id="melody-storage" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="melody-storage"><span class="header-section-number">3.1.3</span> Melody Storage</h3>
+<p>The generated melody is stored in a Pure Data array called <code>melody</code>.</p>
+<p>The array is visualized in the patch for reference.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    MelodyList --&gt;|tabwrite| MelodyArray
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="playback-control" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="playback-control"><span class="header-section-number">3.1.4</span> Playback Control</h3>
+<p>A <code>metro</code> object (metronome) triggers playback at a tempo set by a horizontal slider.</p>
+<p>Each bang from the metronome advances an index, which reads the next note from the <code>melody</code> array.</p>
+<hr>
+</section>
+<section id="midi-output" class="level3" data-number="3.1.5">
+<h3 data-number="3.1.5" class="anchored" data-anchor-id="midi-output"><span class="header-section-number">3.1.5</span> MIDI Output</h3>
+<p>The note value is sent to a <code>makenote</code> object, which creates a MIDI note with velocity and duration.</p>
+<p>The note is then sent to the <code>noteout</code> object, which outputs the MIDI note to your system’s MIDI device.</p>
+<hr>
+</section>
+<section id="step-by-step-data-flow" class="level3" data-number="3.1.6">
+<h3 data-number="3.1.6" class="anchored" data-anchor-id="step-by-step-data-flow"><span class="header-section-number">3.1.6</span> Step-by-Step Data Flow</h3>
+<ol type="1">
+<li><strong>Initialize Scale</strong>: The scale intervals are defined and appended to a list.</li>
+<li><strong>Generate Melody</strong>: A loop generates random notes mapped to the scale, storing them in the <code>melody</code> array.</li>
+<li><strong>Playback</strong>: A metronome triggers reading from the array, sending notes to MIDI output.</li>
+<li><strong>Visualization</strong>: The melody array is displayed as a graph in the patch.</li>
+</ol>
+<hr>
+</section>
+<section id="key-objects-and-their-roles" class="level3" data-number="3.1.7">
+<h3 data-number="3.1.7" class="anchored" data-anchor-id="key-objects-and-their-roles"><span class="header-section-number">3.1.7</span> Key Objects and Their Roles</h3>
+<div style="width: 50%;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Object</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>random 48</code></td>
+<td>Generates random note indices</td>
+</tr>
+<tr class="even">
+<td><code>+ 60</code></td>
+<td>Shifts notes to a higher MIDI octave</td>
+</tr>
+<tr class="odd">
+<td><code>mod 12</code></td>
+<td>Maps notes to scale degrees</td>
+</tr>
+<tr class="even">
+<td><code>list-idx</code></td>
+<td>Retrieves scale degree from the list</td>
+</tr>
+<tr class="odd">
+<td><code>tabwrite</code></td>
+<td>Writes notes to the <code>melody</code> array</td>
+</tr>
+<tr class="even">
+<td><code>metro</code></td>
+<td>Controls playback timing</td>
+</tr>
+<tr class="odd">
+<td><code>tabread</code></td>
+<td>Reads notes from the <code>melody</code> array</td>
+</tr>
+<tr class="even">
+<td><code>makenote</code></td>
+<td>Creates MIDI notes with velocity/duration</td>
+</tr>
+<tr class="odd">
+<td><code>noteout</code></td>
+<td>Sends MIDI notes to output</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</section>
+<section id="diagram-melody-generation-and-playback" class="level3" data-number="3.1.8">
+<h3 data-number="3.1.8" class="anchored" data-anchor-id="diagram-melody-generation-and-playback"><span class="header-section-number">3.1.8</span> Diagram: Melody Generation and Playback</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    S[Scale Message] --&gt; L[list Append]
+    L --&gt; R[random + Offset]
+    R --&gt; M[Modulo/Indexing]
+    M --&gt; A[Melody Array]
+    A --&gt; P[Playback - metro, tabread]
+    P --&gt; MN[makenote]
+    MN --&gt; NO[noteout]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="summary" class="level3" data-number="3.1.9">
+<h3 data-number="3.1.9" class="anchored" data-anchor-id="summary"><span class="header-section-number">3.1.9</span> Summary</h3>
+<p>This patch demonstrates how to algorithmically generate a melody using a musical scale, store it, and play it back via MIDI in Pure Data. The modular structure allows for easy experimentation with different scales, lengths, and playback parameters.</p>
+<hr>
+</section>
+</section>
+<section id="euclidean-sequencer" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="euclidean-sequencer"><span class="header-section-number">3.2</span> Euclidean Sequencer</h2>
+<p>This chapter provides a step-by-step explanation of the <a href="code/euclidean_sequencer/euclidean_sequencer.pd">euclidean_sequencer.pd</a> Pure Data patch. The patch demonstrates how to create a Euclidean sequencer that generates rhythmic patterns based on the Euclidean algorithm.</p>
+<section id="patch-overview-1" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="patch-overview-1"><span class="header-section-number">3.2.1</span> Patch Overview</h3>
+<p>The patch is organized into several functional blocks: - <strong>Euclidean Algorithm</strong> - <strong>Rhythm Generation</strong> - <strong>Playback Control</strong> - <strong>MIDI Output</strong> Below is a simplified diagram of the main data flow</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -787,14 +1050,49 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/sonification.html" class="pagination-link" aria-label="Sonification">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Sonification</span></span>
+      <a href="../chapters/playrec.html" class="pagination-link" aria-label="Rec &amp; Play">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Rec &amp; Play</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../chapters/synthesis.html" class="pagination-link" aria-label="Synthesis">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Synthesis</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

@@ -81,9 +81,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-1e81d527365e20b3495763033adbcf98.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-8ab8b311eebd604b8865a9cbc6c08092.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../site_libs/bootstrap/bootstrap-1e81d527365e20b3495763033adbcf98.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -371,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-is-pure-data" id="toc-what-is-pure-data" class="nav-link active" data-scroll-target="#what-is-pure-data"><span class="header-section-number">1.1</span> What is Pure Data?</a></li>
+  <li><a href="#what-is-pure-data" id="toc-what-is-pure-data" class="nav-link active" data-scroll-target="#what-is-pure-data"><span class="header-section-number">1.1</span> What is Pure Data? <img src="../assets/images/pd_2.png" class="img-fluid" style="width:8.0%"></a></li>
   <li><a href="#why-pure-data" id="toc-why-pure-data" class="nav-link" data-scroll-target="#why-pure-data"><span class="header-section-number">1.2</span> Why Pure Data?</a></li>
   <li><a href="#what-is-creative-coding" id="toc-what-is-creative-coding" class="nav-link" data-scroll-target="#what-is-creative-coding"><span class="header-section-number">1.3</span> What is Creative Coding?</a></li>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="header-section-number">1.4</span> Getting Started</a>
@@ -414,9 +411,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The design of Pure Data echoes the modular synthesis systems of the 20th century, where sound was shaped by routing audio through a network of physical devices linked with patch cables. This historical reference not only grounds Pure Data in a legacy of experimental electronic music but also makes it intuitive for users familiar with analog workflows. By visually “patching” connections, users can simulate and extend these traditional processes in a digital context.</p>
 <p>To fully engage with the creative potential of Pure Data, one can develop or modify algorithms for digital audio using imaginative coding strategies. For instance, building a real-time audio granulator that reinterprets live microphone input can offer both technical challenge and artistic reward. Through this lens, programming becomes a form of creative expression, blending logical structures with aesthetic decisions. By experimenting with signal flow, modulation techniques, or interactive sensors, users cultivate a mindset that is both inventive and analytical—unlocking new possibilities in digital sound design and performance.</p>
 <section id="what-is-pure-data" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="what-is-pure-data"><span class="header-section-number">1.1</span> What is Pure Data?</h2>
+<h2 data-number="1.1" class="anchored" data-anchor-id="what-is-pure-data"><span class="header-section-number">1.1</span> What is Pure Data? <img src="../assets/images/pd_2.png" class="img-fluid" style="width:8.0%"></h2>
 <p>Pure Data (or Pd) is a real-time graphical programming environment for audio, video, and graphical processing. Pure Data is commonly used for live music performance, VeeJaying, sound effects, composition, audio analysis, interfacing with sensors, using cameras, controlling robots or even interacting with websites. Because all of these various media are handled as digital data within the program, many fascinating opportunities for cross-synthesis between them exist. Sound can be used to manipulate video, which could then be streamed over the internet to another computer which might analyze that video and use it to control a motor-driven installation.</p>
-<p><a href="../assets/images/pd_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../assets/images/pd_2.png" class="img-fluid"></a></p>
 <p>Programming with Pure Data is a unique interaction that is much closer to the experience of manipulating things in the physical world. The most basic unit of functionality is a box, and the program is formed by connecting these boxes together into diagrams that both represent the flow of data while actually performing the operations mapped out in the diagram. The program itself is always running, there is no separation between writing the program and running the program, and each action takes effect the moment it is completed.</p>
 <p>The community of users and programmers around Pure Data have created additional functions (called “externals” or “external libraries”) which are used for a wide variety of other purposes, such as video processing, the playback and streaming of MP3s or Quicktime video, the manipulation and display of 3-dimensional objects and the modeling of virtual physical objects. There is a wide range of external libraries available which give Pure Data additional features. Just about any kind of programming is feasible using Pure Data as long as there are externals libraries which provide the most basic units of functionality required.</p>
 <p>The core of Pure Data written and maintained by <a href="http://crca.ucsd.edu/~msp/">Miller S. Puckette</a> and includes the work of <a href="http://www.puredata.org/">many developers</a>, making the whole package very much a community effort.</p>
@@ -1044,38 +1040,6 @@ For example, to use the <code>counter</code> object from the <code>cyclone</code
   </div>
 </nav>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 

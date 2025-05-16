@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -82,6 +102,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -352,6 +373,16 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#key-objects-table" id="toc-key-objects-table" class="nav-link" data-scroll-target="#key-objects-table"><span class="header-section-number">2.1.8</span> Key Objects Table</a></li>
   <li><a href="#how-to-use-the-patch" id="toc-how-to-use-the-patch" class="nav-link" data-scroll-target="#how-to-use-the-patch"><span class="header-section-number">2.1.9</span> How to Use the Patch</a></li>
   </ul></li>
+  <li><a href="#i-am-sitting-in-a-freeverb-patch-walkthrough" id="toc-i-am-sitting-in-a-freeverb-patch-walkthrough" class="nav-link" data-scroll-target="#i-am-sitting-in-a-freeverb-patch-walkthrough"><span class="header-section-number">2.2</span> I am sitting in a [freeverb~] — Patch Walkthrough</a>
+  <ul class="collapse">
+  <li><a href="#conceptual-overview-1" id="toc-conceptual-overview-1" class="nav-link" data-scroll-target="#conceptual-overview-1"><span class="header-section-number">2.2.1</span> Conceptual Overview</a></li>
+  <li><a href="#system-diagram-1" id="toc-system-diagram-1" class="nav-link" data-scroll-target="#system-diagram-1"><span class="header-section-number">2.2.2</span> System Diagram</a></li>
+  <li><a href="#unique-features-of-the-freeverb-version" id="toc-unique-features-of-the-freeverb-version" class="nav-link" data-scroll-target="#unique-features-of-the-freeverb-version"><span class="header-section-number">2.2.3</span> Unique Features of the [freeverb~] Version</a></li>
+  <li><a href="#step-by-step-explanation" id="toc-step-by-step-explanation" class="nav-link" data-scroll-target="#step-by-step-explanation"><span class="header-section-number">2.2.4</span> Step-by-Step Explanation</a></li>
+  <li><a href="#key-objects-table-1" id="toc-key-objects-table-1" class="nav-link" data-scroll-target="#key-objects-table-1"><span class="header-section-number">2.2.5</span> Key Objects Table</a></li>
+  <li><a href="#creative-applications" id="toc-creative-applications" class="nav-link" data-scroll-target="#creative-applications"><span class="header-section-number">2.2.6</span> Creative Applications</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -391,7 +422,7 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p>“…I am recording the sound of my speaking voice and I am going to play it back into the room again and again…”</p>
 </blockquote>
-<p>As listeners, we know what is going to happen, but we don’t know <strong>how</strong> it will happen. We listen, following Lucier’s recorded voice. Then, Lucier plays the recording into the room and re-records it. This time, we begin to hear more of the room’s acoustic characteristics. He continues to play back and re-record his voice—over and over—until his speech becomes softened, almost dissolved, into the sonic reflections of the room in which the piece was recorded and re-recorded.</p>
+<p>As listeners, we know what is going to happen, but we don’t know <strong>how</strong> it will happen <span class="citation" data-cites="hasse2012">(<a href="#ref-hasse2012" role="doc-biblioref">Hasse 2012</a>)</span>. We listen, following Lucier’s recorded voice. Then, Lucier plays the recording into the room and re-records it. This time, we begin to hear more of the room’s acoustic characteristics. He continues to play back and re-record his voice—over and over—until his speech becomes softened, almost dissolved, into the sonic reflections of the room in which the piece was recorded and re-recorded.</p>
 <p>One effective way to study a piece is to replicate its technical aspects and the devices involved. The aim of this activity is to recreate the technical setup of <em>I’m Sitting in a Room</em>, focusing on the processes of recording, playback, and automation.</p>
 <p>There are many ways to implement this technical system. Just to mention two environments we’re currently working with: it’s relatively straightforward in <strong>Pure Data</strong>.</p>
 <p>In terms of hardware, besides a computer, you’ll need a <strong>speaker</strong> (mono audio output), a <strong>microphone</strong> (mono audio input), and a <strong>semi-reverberant room</strong>.</p>
@@ -422,8 +453,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="pure-data-implementation-of-im-sitting-in-a-room" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="pure-data-implementation-of-im-sitting-in-a-room"><span class="header-section-number">2.1.1</span> Pure Data implementation of <em>I’m sitting in a room</em></h3>
 <p>&nbsp; <img src="../assets/screenshots/playrec/sitting.png" class="img-fluid" alt="Pure Data implementation of I am sitting in a room"></p>
-<p>In this section, we will break down the Pure Data patch <code>I-am-sitting-in-a-room.pd</code> step by step. This patch is inspired by Alvin Lucier’s iconic piece and demonstrates how to recursively record and play back sound to reveal the resonant frequencies of a room.</p>
-<hr>
+<p>In this section, we will break down the Pure Data patch <a href="../assets/code/playrec/I-am-sitting-in-a-room.pd"><code>I-am-sitting-in-a-room.pd</code></a> step by step. This patch is inspired by Alvin Lucier’s iconic piece and demonstrates how to recursively record and play back sound to reveal the resonant frequencies of a room.</p>
 <section id="conceptual-overview" class="level4" data-number="2.1.1.1">
 <h4 data-number="2.1.1.1" class="anchored" data-anchor-id="conceptual-overview"><span class="header-section-number">2.1.1.1</span> Conceptual Overview</h4>
 <p>The patch enables you to:</p>
@@ -432,77 +462,55 @@ ul.task-list li input[type="checkbox"] {
 <li>Play back the recording into the room and re-record it.</li>
 <li>Repeat this process, so the room’s resonances become more pronounced with each generation.</li>
 </ul>
-<hr>
 </section>
 </section>
 <section id="system-diagram" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="system-diagram"><span class="header-section-number">2.1.2</span> System Diagram</h3>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart TD
-    A[Microphone adc~] --&gt; B[s~ audio.input]
-    B --&gt; C[Record A writesf~ record-A.wav]
-    C --&gt; D[Playback readsf~ record-A.wav]
-    D --&gt; E[throw~ audio]
-    E --&gt; F[catch~ audio]
-    F --&gt; G[Speakers dac~]
-    D --&gt; H[Record B writesf~ record-B.wav]
-    H -.-&gt; D
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<hr>
 <p>The following diagram illustrates the recursive nature of the recording and playback process, similar to how Lucier’s piece unfolds. Each generation of tape recorders captures the previous one, creating a feedback loop that emphasizes the room’s resonances.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart TD
-    %% Define styles without dashes in fill values
-    classDef recorder1 fill:#d4f1c5,stroke:#333
-    classDef recorder2 fill:#c5e0f1,stroke:#333
-    classDef microphone fill:#f1e3c5,stroke:#333
-    classDef roomStyle fill:#f5f5f5,stroke:#333,stroke-dasharray:5 5
+<pre class="mermaid mermaid-js">flowchart TB
+  %% Top level source
+  Input[Microphone]
+  
+  %% Horizontal arrangement of recorders A and B
+  subgraph PLAYBACK RECORDERS
+    direction LR
+    subgraph RecorderA [DEVICE A]
+      RecordA[writesf~ A.wav]
+      PlayA[readsf~ A.wav]
+      RecordA -.-&gt; PlayA
+    end
     
-    %% Generation 1
-    mic1["Microphone"]:::microphone --&gt; tr1a["Tape Recorder 1 Records Gen 1"]:::recorder1
-    tr1a --&gt; tr2a["Tape Recorder 2 Has Gen 1 Tape"]:::recorder2
-    
-    %% Generation 2 - Simultaneous processes
-    tr2a --&gt; room1["Room"]:::roomStyle
-    room1 --&gt; mic2["Microphone"]:::microphone 
-    mic2 --&gt; tr1b["Tape Recorder 1 Records Gen 2"]:::recorder1
-    
-    %% Transfer for Gen 2
-    tr1b --&gt; tr2b["Tape Recorder 2 Has Gen 2 Tape"]:::recorder2
-    
-    %% Generation 3 - Simultaneous processes
-    tr2b --&gt; room2["Room"]:::roomStyle
-    room2 --&gt; mic3["Microphone"]:::microphone
-    mic3 --&gt; tr1c["Tape Recorder 1 Records Gen 3"]:::recorder1
-    
-    %% Transfer for Gen 3
-    tr1c --&gt; tr2c["Tape Recorder 2 Has Gen 3 Tape"]:::recorder2
-    
-    %% Show flow between generations
-    tr2a -.- |"Play and record simultaneously"| mic2
-    tr2b -.- |"Play and record simultaneously"| mic3
-    
-    %% Continue process
-    tr2c -.- next["Continue process"]
-    
-    %% Apply styles
-    class mic1,mic2,mic3 microphone
-    class tr1a,tr1b,tr1c recorder1
-    class tr2a,tr2b,tr2c recorder2
-    class room1,room2 roomStyle
+    subgraph RecorderB [DEVICE B]
+      RecordB[writesf~ B.wav]
+      PlayB[readsf~ B.wav]
+      RecordB -.-&gt;PlayB
+    end
+  end
+  
+  %% Output at the bottom  
+  Output[Speaker]
+  
+  %% Clear connections showing signal flow
+  Input --&gt; RecordA
+  Input ==&gt; Output
+  
+  PlayA --&gt; Output
+  PlayB --&gt; Output
+  
+  PlayA --&gt; RecordB
+  PlayB --&gt; RecordA
+  
+  %% Feedback path showing recursion
+  PlayB -.-&gt;|"Trigger to&lt;br&gt; start recording"| RecordA
+  PlayA -.-&gt;|"Trigger to&lt;br&gt; start recording"| RecordB
+  Output ==&gt; room["ROOM'S&lt;br&gt;REFLECTIONS"]:::roomStyle ==&gt; Input
+
+  classDef roomStyle fill:#f5f5f5,stroke:#333,stroke-dasharray:5 5 
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -517,7 +525,6 @@ ul.task-list li input[type="checkbox"] {
 <li>The signal is sent to <strong><code>s~ audio.input</code></strong>, making it available to other parts of the patch.</li>
 <li>This modular routing allows the same input to be used for both recording and playback chains.</li>
 </ul>
-<hr>
 </section>
 <section id="step-2-recording-your-voice-record-a.wav" class="level3" data-number="2.1.4">
 <h3 data-number="2.1.4" class="anchored" data-anchor-id="step-2-recording-your-voice-record-a.wav"><span class="header-section-number">2.1.4</span> Step 2: Recording Your Voice (record-A.wav)</h3>
@@ -528,7 +535,6 @@ ul.task-list li input[type="checkbox"] {
 <li>The incoming audio from your microphone is now being recorded to <code>record-A.wav</code>.</li>
 <li>Press the <strong>Stop Recording</strong> button (<code>bng</code> labeled “Stop Recording”) to send the <code>stop</code> message, ending the recording.</li>
 </ul>
-<hr>
 </section>
 <section id="step-3-playback-and-re-recording-record-b.wav" class="level3" data-number="2.1.5">
 <h3 data-number="2.1.5" class="anchored" data-anchor-id="step-3-playback-and-re-recording-record-b.wav"><span class="header-section-number">2.1.5</span> Step 3: Playback and Re-recording (record-B.wav)</h3>
@@ -542,7 +548,6 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 <li>This means the playback of your first recording is re-recorded, capturing both the original sound and the room’s response.</li>
 </ul>
-<hr>
 </section>
 <section id="step-4-recursive-process" class="level3" data-number="2.1.6">
 <h3 data-number="2.1.6" class="anchored" data-anchor-id="step-4-recursive-process"><span class="header-section-number">2.1.6</span> Step 4: Recursive Process</h3>
@@ -553,14 +558,12 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 <li>Each iteration makes the speech less intelligible and the room’s resonant frequencies more prominent, just like in Lucier’s piece.</li>
 </ul>
-<hr>
 </section>
 <section id="step-5-output" class="level3" data-number="2.1.7">
 <h3 data-number="2.1.7" class="anchored" data-anchor-id="step-5-output"><span class="header-section-number">2.1.7</span> Step 5: Output</h3>
 <ul>
 <li>All audio routed to <strong><code>throw~ audio</code></strong> is collected by <strong><code>catch~ audio</code></strong> and sent to <strong><code>dac~</code></strong> for playback through your speakers or headphones.</li>
 </ul>
-<hr>
 </section>
 <section id="key-objects-table" class="level3" data-number="2.1.8">
 <h3 data-number="2.1.8" class="anchored" data-anchor-id="key-objects-table"><span class="header-section-number">2.1.8</span> Key Objects Table</h3>
@@ -602,7 +605,6 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<hr>
 </section>
 <section id="how-to-use-the-patch" class="level3" data-number="2.1.9">
 <h3 data-number="2.1.9" class="anchored" data-anchor-id="how-to-use-the-patch"><span class="header-section-number">2.1.9</span> How to Use the Patch</h3>
@@ -616,11 +618,287 @@ Use the playback button to play your recording into the room and simultaneously 
 <li><strong>Repeat:</strong><br>
 Repeat the playback and re-recording process as many times as you like to hear the room’s resonances emerge.</li>
 </ol>
-<hr>
 <p>This patch is a practical and creative way to explore acoustic phenomena and the transformation of sound through recursive recording, echoing the spirit of Lucier’s original work.</p>
-
-
 </section>
+</section>
+<section id="i-am-sitting-in-a-freeverb-patch-walkthrough" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="i-am-sitting-in-a-freeverb-patch-walkthrough"><span class="header-section-number">2.2</span> I am sitting in a [freeverb~] — Patch Walkthrough</h2>
+<p>The patch <a href="../assets/code/playrec/I-am-sitting-in-a-room-freeverb.pd">I-am-sitting-in-a-room-freeverb.pd</a> extends the original <em>I am sitting in a room</em> concept by introducing a <strong>virtual acoustic environment</strong> using reverb and allowing for <strong>pre-recorded audio input</strong> instead of just live microphone input. This adaptation provides more creative flexibility and consistent results compared to using a physical room.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../assets/screenshots/playrec/sitting-freeverb.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Pure Data implementation of I am sitting in a room with freeverb"><img src="../assets/screenshots/playrec/sitting-freeverb.png" class="img-fluid figure-img" alt="Pure Data implementation of I am sitting in a room with freeverb"></a></p>
+<figcaption>Pure Data implementation of I am sitting in a room with freeverb</figcaption>
+</figure>
+</div>
+<p>This patch is designed to simulate the recursive recording process of Lucier’s piece while allowing for more control over the sound environment. It uses the <code>freeverb~</code> object to create a virtual room effect, enabling you to manipulate the acoustic characteristics of the sound without relying on a physical space.</p>
+<section id="conceptual-overview-1" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="conceptual-overview-1"><span class="header-section-number">2.2.1</span> Conceptual Overview</h3>
+<p>The patch enables you to: - Use a pre-recorded audio file OR live input as your source material - Add artificial reverb to simulate room characteristics - Follow the same recursive recording process as the original - Achieve more controlled, repeatable results</p>
+</section>
+<section id="system-diagram-1" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="system-diagram-1"><span class="header-section-number">2.2.2</span> System Diagram</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+  %% Top level source
+  AudioFile[Audio File]
+  
+  %% Horizontal arrangement of recorders A and B
+  subgraph PLAYBACK RECORDERS
+    direction LR
+    subgraph RecorderA [DEVICE A]
+      RecordA[writesf~ A.wav]
+      PlayA[readsf~ A.wav]
+      RecordA ==&gt; PlayA
+    end
+    
+    subgraph RecorderB [DEVICE B]
+      RecordB[writesf~ B.wav]
+      PlayB[readsf~ B.wav]
+      RecordB ==&gt; PlayB
+    end
+  end
+  
+  subgraph VIRTUAL ROOM
+  %% Reverb block in the middle
+    VirtualRoom(((freeverb~&lt;br&gt;Virtual Room)))
+  end  
+  
+  %% Output at the bottom  
+  Output[dac~]
+  
+  %% Clear connections showing signal flow
+  AudioFile --&gt; RecordA
+  AudioFile --&gt; Output
+  
+  PlayA ==&gt; VirtualRoom
+  PlayB ==&gt; VirtualRoom
+  
+  VirtualRoom ==&gt; RecordB
+  VirtualRoom ==&gt; RecordA
+  VirtualRoom --&gt; Output
+  
+  %% Feedback path showing recursion
+  PlayB -.-&gt;|"Trigger to&lt;br&gt; start recording"| RecordA
+  PlayA -.-&gt;|"Trigger to&lt;br&gt; start recording"| RecordB
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>This diagram illustrates the recursive nature of the recording and playback process, similar to how Lucier’s piece unfolds. Each generation of tape recorders captures the previous one, creating a feedback loop that emphasizes the room’s resonances.</p>
+</section>
+<section id="unique-features-of-the-freeverb-version" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="unique-features-of-the-freeverb-version"><span class="header-section-number">2.2.3</span> Unique Features of the [freeverb~] Version</h3>
+<section id="audio-file-input" class="level4" data-number="2.2.3.1">
+<h4 data-number="2.2.3.1" class="anchored" data-anchor-id="audio-file-input"><span class="header-section-number">2.2.3.1</span> 1. Audio File Input</h4>
+<p>Unlike the original patch that only uses microphone input, this version can:</p>
+<ul>
+<li>Play a pre-recorded audio file (<code>speech.wav</code>) as the initial source</li>
+<li>Process this file through reverb before recording</li>
+<li>Trigger playback with a button (labeled “2. Playback audio”)</li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    bng([bng]) --&gt; msg["msg open speech.wav, 1"]
+    msg --&gt; readsf["readsf~"]
+    readsf --&gt; freeverb["freeverb~"]
+    freeverb --&gt; send["s~ audio.input"]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="virtual-acoustic-environment" class="level4" data-number="2.2.3.2">
+<h4 data-number="2.2.3.2" class="anchored" data-anchor-id="virtual-acoustic-environment"><span class="header-section-number">2.2.3.2</span> 2. Virtual Acoustic Environment</h4>
+<p>Instead of relying on a physical room’s acoustics, this patch uses <code>freeverb~</code> objects to create a simulated acoustic space:</p>
+<ul>
+<li>Every audio signal (input and playback) passes through a <code>freeverb~</code> object</li>
+<li>This creates consistent reverberation that can be adjusted and controlled</li>
+<li>Multiple <code>freeverb~</code> objects process different stages of the audio for cumulative effects</li>
+</ul>
+</section>
+<section id="enhanced-control-flow" class="level4" data-number="2.2.3.3">
+<h4 data-number="2.2.3.3" class="anchored" data-anchor-id="enhanced-control-flow"><span class="header-section-number">2.2.3.3</span> 3. Enhanced Control Flow</h4>
+<p>The patch includes numbered controls for better workflow:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 28%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Button</th>
+<th>Label</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Start recording</td>
+<td>Begins recording the input source to record-A.wav</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Playback audio</td>
+<td>Plays the speech.wav file through reverb into the system</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Stop recording</td>
+<td>Stops the current recording process</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="multiple-sendreceive-paths" class="level4" data-number="2.2.3.4">
+<h4 data-number="2.2.3.4" class="anchored" data-anchor-id="multiple-sendreceive-paths"><span class="header-section-number">2.2.3.4</span> 4. Multiple Send/Receive Paths</h4>
+<p>The patch uses additional send/receive pairs to manage signal routing:</p>
+<ul>
+<li><code>s~/r~ audio.input</code> - Routes input signals to the recording object</li>
+<li><code>s~/r~ player.A</code> - Routes playback from file A to recorder B</li>
+<li><code>s~/r~ player.B</code> - Routes playback from file B back to recorder A</li>
+<li><code>throw~/catch~ audio</code> - Collects all signals to be sent to the output</li>
+</ul>
+</section>
+</section>
+<section id="step-by-step-explanation" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="step-by-step-explanation"><span class="header-section-number">2.2.4</span> Step-by-Step Explanation</h3>
+<section id="step-1-initial-audio-source-options" class="level4" data-number="2.2.4.1">
+<h4 data-number="2.2.4.1" class="anchored" data-anchor-id="step-1-initial-audio-source-options"><span class="header-section-number">2.2.4.1</span> Step 1: Initial Audio Source Options</h4>
+<p>This patch provides two possible sources for the initial recording:</p>
+<ol type="1">
+<li><strong>Pre-recorded file input:</strong>
+<ul>
+<li>Click “2. Playback audio” button to play <code>speech.wav</code></li>
+<li>The file is played through <code>readsf~</code>, processed by <code>freeverb~</code>, and sent to <code>s~ audio.input</code></li>
+</ul></li>
+<li><strong>Live input:</strong> (not explicitly shown in this version but could be added using <code>adc~</code>)
+<ul>
+<li>Any signal sent to <code>s~ audio.input</code> will be recorded when recording starts</li>
+</ul></li>
+</ol>
+</section>
+<section id="step-2-recording-the-first-generation" class="level4" data-number="2.2.4.2">
+<h4 data-number="2.2.4.2" class="anchored" data-anchor-id="step-2-recording-the-first-generation"><span class="header-section-number">2.2.4.2</span> Step 2: Recording the First Generation</h4>
+<ul>
+<li>Click “1. Start recording” to begin recording to <code>record-A.wav</code></li>
+<li>The signal from <code>s~ audio.input</code> is captured by <code>r~ audio.input</code> and sent to <code>writesf~</code></li>
+<li>The resulting file contains your source material with initial reverb applied</li>
+</ul>
+</section>
+<section id="step-3-playback-and-re-recording" class="level4" data-number="2.2.4.3">
+<h4 data-number="2.2.4.3" class="anchored" data-anchor-id="step-3-playback-and-re-recording"><span class="header-section-number">2.2.4.3</span> Step 3: Playback and Re-recording</h4>
+<ul>
+<li>After stopping recording with “3. Stop recording”, the patch automatically:
+<ul>
+<li>Opens and plays <code>record-A.wav</code> through <code>readsf~</code></li>
+<li>Processes it through another <code>freeverb~</code> for additional reverb</li>
+<li>Sends it to both <code>throw~ audio</code> (for monitoring) and <code>s~ player.A</code></li>
+<li>The <code>player.A</code> signal is received and recorded to <code>record-B.wav</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="step-4-recursive-process-1" class="level4" data-number="2.2.4.4">
+<h4 data-number="2.2.4.4" class="anchored" data-anchor-id="step-4-recursive-process-1"><span class="header-section-number">2.2.4.4</span> Step 4: Recursive Process</h4>
+<ul>
+<li>When <code>record-B.wav</code> is created, it can be played back through another <code>readsf~</code></li>
+<li>This signal is also processed by <code>freeverb~</code></li>
+<li>The output is sent to both <code>throw~ audio</code> and <code>s~ player.B</code></li>
+<li>The <code>player.B</code> signal could be received and recorded back to <code>record-A.wav</code></li>
+<li>This cycle can continue, with each generation accumulating more of the virtual room’s characteristics</li>
+</ul>
+</section>
+<section id="step-5-output-1" class="level4" data-number="2.2.4.5">
+<h4 data-number="2.2.4.5" class="anchored" data-anchor-id="step-5-output-1"><span class="header-section-number">2.2.4.5</span> Step 5: Output</h4>
+<ul>
+<li>All audio signals sent to <code>throw~ audio</code> are collected by <code>catch~ audio</code></li>
+<li>The mixed signal is sent to <code>out~</code> for playback through speakers/headphones</li>
+</ul>
+</section>
+</section>
+<section id="key-objects-table-1" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="key-objects-table-1"><span class="header-section-number">2.2.5</span> Key Objects Table</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 73%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Object</th>
+<th>Purpose in This Patch</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>freeverb~</code></td>
+<td>Creates virtual room acoustics by adding reverberation</td>
+</tr>
+<tr class="even">
+<td><code>readsf~</code></td>
+<td>Plays audio files (source material or previous generations)</td>
+</tr>
+<tr class="odd">
+<td><code>writesf~</code></td>
+<td>Records audio to file (for each generation)</td>
+</tr>
+<tr class="even">
+<td><code>s~/r~</code></td>
+<td>Routes audio between different parts of the patch</td>
+</tr>
+<tr class="odd">
+<td><code>throw~/catch~</code></td>
+<td>Mixes and outputs all audio signals</td>
+</tr>
+<tr class="even">
+<td><code>del</code></td>
+<td>Adds small delays to ensure proper sequencing of operations</td>
+</tr>
+<tr class="odd">
+<td><code>bng</code></td>
+<td>Provides buttons for user interaction</td>
+</tr>
+<tr class="even">
+<td><code>out~</code></td>
+<td>Sends audio to speakers/headphones</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="creative-applications" class="level3" data-number="2.2.6">
+<h3 data-number="2.2.6" class="anchored" data-anchor-id="creative-applications"><span class="header-section-number">2.2.6</span> Creative Applications</h3>
+<ul>
+<li><strong>Experiment with reverb settings:</strong> Try different room sizes, damping, and wet/dry mix</li>
+<li><strong>Use different source materials:</strong> Test various speech samples, musical phrases, or sound effects</li>
+<li><strong>Create hybrid processes:</strong> Record the first generation in a real room, then switch to the virtual environment</li>
+<li><strong>Build compositional sequences:</strong> Layer different generations to create evolving textures</li>
+<li><strong>Compare real vs.&nbsp;virtual:</strong> Process the same source through both the original and freeverb patches to contrast physical and virtual acoustics</li>
+</ul>
+<p>This virtual approach offers a controlled laboratory for exploring the core concepts of Lucier’s piece, making it accessible even without an ideal acoustic space, while also opening new creative possibilities that wouldn’t be possible in a physical implementation.</p>
+</section>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-hasse2012" class="csl-entry" role="listitem">
+Hasse, Sarah. 2012. <span>“I Am Sitting in a Room.”</span> <em>Body, Space &amp; Technology</em> 11. <a href="https://doi.org/10.16995/bst.71">https://doi.org/10.16995/bst.71</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
